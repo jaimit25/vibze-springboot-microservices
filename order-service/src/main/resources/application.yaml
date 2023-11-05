@@ -1,0 +1,28 @@
+server:
+  port: 8082  # Port for the order-service
+
+spring:
+  application:
+    name: order-service  # Name of your service
+  datasource:
+    url: jdbc:mysql://${db_url:localhost}:3306/vibze
+    username: root
+    password:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  service-url:
+    defaultZone: http://${service_registry:localhost}:8761/eureka/
